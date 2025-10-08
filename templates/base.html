@@ -4,45 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}E-Library{% endblock %}</title>
+    <!-- External CSS libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    {% block styles %}{% endblock %}
+    {% block styles %}{% endblock %} <!-- Block for page-specific styles -->
 </head>
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
+            <!-- Sidebar Navigation -->
             <nav class="col-lg-2 col-md-3 d-md-block sidebar collapse" id="sidebar">
                 <div class="position-sticky pt-3">
                     <div class="sidebar-header">
-                        <div class="sidebar-title">SG Library</div>
+                        <div class="sidebar-title">SG Library</div> <!-- Library branding -->
                     </div>
                     <div class="divider"></div>
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
+                            <!-- Active state based on current page -->
                             <a href="{{ url_for('books') }}" class="nav-link {% if request.endpoint == 'books' %}active{% endif %}" data-bs-toggle="collapse" data-bs-target="#sidebar">
                                 <i class="fas fa-id-card me-2"></i> 
                                 Book Titles
                             </a>
                         </li>
-                        {% block sidebar_links %}{% endblock %}
+                        {% block sidebar_links %}{% endblock %} <!-- Block for additional sidebar links -->
                     </ul>
                 </div>
             </nav>
 
+            <!-- Main Content Area -->
             <main class="col-lg-10 col-md-9 ms-sm-auto px-4" id="main-content">
                 <div class="main-content-wrapper">
+                    <!-- Top Navigation Bar -->
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" id="top-nav">
                         <div class="btn-toolbar mb-0">
-                            {% block top_nav_buttons %}{% endblock %}
+                            {% block top_nav_buttons %}{% endblock %} <!-- Block for top navigation buttons -->
                         </div>
-                        <h1 class="h2 mb-0 text-left flex-grow-1">{% block page_title %}{% endblock %}</h1>
+                        <h1 class="h2 mb-0 text-left flex-grow-1">{% block page_title %}{% endblock %}</h1> <!-- Page title -->
+                        <!-- Mobile sidebar toggle button -->
                         <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation" id="sidebar-toggle">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
                     
                     <div class="container-fluid">
+                        <!-- Flash messages display -->
                         {% with messages = get_flashed_messages(with_categories=true) %}
                             {% if messages %}
                                 {% for category, message in messages %}
@@ -53,13 +60,14 @@
                                 {% endfor %}
                             {% endif %}
                         {% endwith %}
-                        {% block content %}{% endblock %}
+                        {% block content %}{% endblock %} <!-- Main content block -->
                     </div>
                 </div>
             </main>
         </div>
     </div>
     
+    <!-- JavaScript libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
@@ -69,12 +77,12 @@
             const mainContentWrapper = document.querySelector('.main-content-wrapper');
             const navLinks = document.querySelectorAll('.sidebar .nav-link');
             
-            // Initialize Bootstrap Collapse
+            // Initialize Bootstrap Collapse for sidebar
             const bsCollapse = new bootstrap.Collapse(sidebar, {
                 toggle: false
             });
             
-            // Ensure sidebar starts hidden on mobile
+            // Ensure sidebar starts hidden on mobile devices
             function initializeSidebar() {
                 if (window.innerWidth < 768) {
                     bsCollapse.hide();
@@ -91,10 +99,10 @@
                 }
             }
             
-            // Initialize on load
+            // Initialize sidebar on page load
             initializeSidebar();
             
-            // Handle sidebar show event
+            // Handle sidebar show event - adjust layout when sidebar opens
             sidebar.addEventListener('show.bs.collapse', function() {
                 document.body.classList.add('sidebar-open');
                 if (window.innerWidth < 768 && mainContentWrapper) {
@@ -102,7 +110,7 @@
                 }
             });
             
-            // Handle sidebar hide event
+            // Handle sidebar hide event - restore layout when sidebar closes
             sidebar.addEventListener('hide.bs.collapse', function() {
                 document.body.classList.remove('sidebar-open');
                 if (mainContentWrapper) {
@@ -119,19 +127,19 @@
                 }
             });
             
-            // Close sidebar on ESC key
+            // Close sidebar on ESC key press
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && sidebar.classList.contains('show')) {
                     bsCollapse.hide();
                 }
             });
             
-            // Handle window resize
+            // Handle window resize events
             window.addEventListener('resize', function() {
                 initializeSidebar();
             });
             
-            // Handle orientation change
+            // Handle orientation change on mobile devices
             window.addEventListener('orientationchange', function() {
                 setTimeout(function() {
                     initializeSidebar();
@@ -139,7 +147,7 @@
                 }, 300);
             });
             
-            // Dynamic sidebar height calculation
+            // Dynamic sidebar height calculation for mobile responsive design
             function updateSidebarHeight() {
                 if (window.innerWidth < 768 && sidebar) {
                     const wasVisible = sidebar.classList.contains('show');
@@ -159,9 +167,10 @@
                 }
             }
             
-            // Update sidebar height on load and resize
+            // Update sidebar height on initial load
             updateSidebarHeight();
             
+            // Debounced resize handler for sidebar height updates
             let resizeTimer;
             window.addEventListener('resize', function() {
                 clearTimeout(resizeTimer);
@@ -170,6 +179,6 @@
         });
     </script>
     
-    {% block scripts %}{% endblock %}
+    {% block scripts %}{% endblock %} <!-- Block for page-specific scripts -->
 </body>
 </html>
