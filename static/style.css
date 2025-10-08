@@ -1,7 +1,3 @@
-/* ==========================================
-  E-Library Application - Optimized CSS
-  ========================================== */
-
 /* CSS Custom Properties for Consistent Theming */
 :root {
     /* Colors */
@@ -42,16 +38,14 @@
     --sidebar-height: 100px;
 }
 
-/* ==========================================
-  GENERAL & LAYOUT
-  ========================================== */
+/* General and layout */
 
 main {
     background-color: var(--background-light);
     padding-top: var(--spacing-md);
 }
 
-/* --- Top Navigation Bar --- */
+/* Top Navigation Bar */
 .border-bottom {
     border-color: var(--border-light);
     background: rgba(131, 170, 140, 0.85);
@@ -112,9 +106,7 @@ main {
     height: 1.5em;
 }
 
-/* ==========================================
-  SIDEBAR
-  ========================================== */
+/* Sidebar */
 
 .sidebar {
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/static/images/sidebar.png');
@@ -230,9 +222,7 @@ main {
     border-radius: 0;
 }
 
-/* ==========================================
-  BOOK COMPONENTS
-  ========================================== */
+/* Book components */
 
 .book-cover {
     transition: all var(--transition-medium);
@@ -271,9 +261,7 @@ main {
     flex-wrap: wrap;
 }
 
-/* ==========================================
-  BUTTON COMPONENTS
-  ========================================= */
+/* Button components */
 
 .btn,
 .btn-primary,
@@ -306,9 +294,7 @@ main {
     color: white;
 }
 
-/* ==========================================
-  CATEGORY FILTER
-  ========================================== */
+/* Category filter */
 
 .category-filter-container {
     background-color: rgba(40, 167, 69, 0.15);
@@ -359,9 +345,7 @@ main {
     border-color: var(--primary-green-hover);
 }
 
-/* ==========================================
-  MAIN CONTENT WRAPPER FOR PUSH DOWN EFFECT
-  ========================================== */
+/* Main content wrapper for push down effect */
 
 .main-content-wrapper {
     position: relative;
@@ -372,11 +356,9 @@ main {
     perspective: 1000px;
 }
 
-/* ==========================================
-  RESPONSIVE STYLES
-  ========================================== */
+/* Responsive styles */
 
-/* --- Medium Screens & Below (768px) --- */
+/* Medium Screens & Below (768px) */
 @media (max-width: 767.98px) {
     /* PUSH DOWN EFFECT - Main content wrapper */
     .main-content-wrapper {
@@ -459,7 +441,7 @@ main {
         perspective: 1000px;
     }
 
-    /* UPDATED MOBILE SIDEBAR MODIFICATIONS */
+    /* Updated mobile sidebar modifications */
     .sidebar .divider {
         width: 100%;
         margin-left: 0;
@@ -576,24 +558,6 @@ main {
         margin: 0 auto var(--spacing-lg) auto;
         display: block;
     }
-
-    .book-details-container .row {
-        flex-direction: column;
-    }
-    
-    .book-details-container .col-xl-4,
-    .book-details-container .col-lg-5,
-    .book-details-container .col-md-6,
-    .book-details-container .col-sm-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        width: 100%;
-    }
-    
-    .d-flex.justify-content-center.align-items-start {
-        justify-content: center;
-        align-items: center;
-    }
     
     .category-filter-container {
         flex-direction: row;
@@ -643,9 +607,7 @@ main {
     }
 }
 
-/* ==========================================
-  SMOOTH ANIMATION ENHANCEMENTS
-  ========================================== */
+/* Smooth animation enhancements */
 
 @keyframes slideDownBounce {
     0% {
@@ -659,7 +621,7 @@ main {
     }
 }
 
-/* --- Small Screens & Below (576px) --- */
+/* Small Screens (576px) - Keep horizontal layout */
 @media (max-width: 575.98px) {
     :root {
         --sidebar-height: 100px;
@@ -689,23 +651,13 @@ main {
         padding-top: var(--spacing-xs);
     }
 
+    /* Keep Book Details horizontal on small screens */
     .book-details-container .book-title {
         font-size: 1.5rem;
     }
     
     .book-details-container .author-byline {
         font-size: 1.5rem;
-    }
-    
-    .book-details-container .col-xl-4,
-    .book-details-container .col-lg-5,
-    .book-details-container .col-md-6 {
-        margin-bottom: var(--spacing-xl);
-    }
-    
-    .book-cover-image {
-        width: 100%;
-        margin: 0 0 var(--spacing-lg) 0;
     }
     
     .book-title {
@@ -749,7 +701,7 @@ main {
     }
 }
 
-/* --- Extra-Small Screens & Below (400px) --- */
+/* Extra-Small Screens & Below (400px) */
 @media (max-width: 400px) {
     :root {
         --sidebar-height: 100px;
@@ -780,9 +732,17 @@ main {
         margin-bottom: var(--spacing-sm);
     }
     
+    .book-details-container .book-title {
+        font-size: 1.25rem;
+    }
+    
     .author-byline {
         font-size: 1.4rem;
         margin-bottom: var(--spacing-md);
+    }
+    
+    .book-details-container .author-byline {
+        font-size: 1.25rem;
     }
     
     .book-card .book-cover {
@@ -790,14 +750,6 @@ main {
         height: auto;
         margin: 0 auto;
         display: block;
-    }
-
-    .book-details-container .book-title {
-        font-size: 1.25rem;
-    }
-    
-    .book-details-container .author-byline {
-        font-size: 1.25rem;
     }
     
     .number-of-titles {
@@ -813,7 +765,7 @@ main {
     }
 }
 
-/* --- Tiny Screens & Below (320px) --- */
+/* Tiny Screens & Below (320px) */
 @media (max-width: 320px) {
     :root {
         --sidebar-height: 100px;
@@ -823,8 +775,16 @@ main {
         font-weight: normal;
     }
     
+    .book-details-container .book-title {
+        font-size: 1.15rem;
+    }
+    
     .author-byline {
         font-size: 1.3rem;
+    }
+    
+    .book-details-container .author-byline {
+        font-size: 1.15rem;
     }
     
     .book-info {
@@ -841,14 +801,6 @@ main {
     
     .book-card .book-cover {
         max-width: var(--book-cover-xs);
-    }
-
-    .book-details-container .book-title {
-        font-size: 1.15rem;
-    }
-    
-    .book-details-container .author-byline {
-        font-size: 1.15rem;
     }
 }
 
