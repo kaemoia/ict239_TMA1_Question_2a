@@ -1,48 +1,47 @@
 from flask import Flask, render_template, request
-from books import all_books 
+from books import all_books
 
-# Initialize Flask application
-app = Flask(__name__)  
+app = Flask(__name__)
 
 def get_description_preview(description_list):
-    """Get first and last paragraphs of description for preview"""
+    """Get first and last paragraphs of description"""
     if not description_list:
-        return ""  # Return empty string if no description
+        return ""
     if len(description_list) == 1:
-        return description_list[0]  # Return single paragraph as-is
-    return description_list[0] + "..." + description_list[-1]  # Combine first and last paragraphs
+        return description_list[0]
+    return description_list[0] + "..." + description_list[-1]
 
 def get_sorted_books():
-    """Return books sorted by title in alphabetical order"""
+    """Return books sorted by title"""
     return sorted(all_books, key=lambda book: book['title'])
 
 def filter_books_by_category(category):
-    """Filter books by category (case-insensitive)"""
+    """Filter books by category"""
     if not category or category.lower() == 'all':
-        return get_sorted_books()  # Return all books if no category specified
+        return get_sorted_books()
     
     filtered = []
     for book in all_books:
         if book['category'].lower() == category.lower():
             filtered.append(book)
-    return sorted(filtered, key=lambda book: book['title'])  # Return filtered books sorted by title
+    return sorted(filtered, key=lambda book: book['title'])
 
 @app.route('/')
 @app.route('/books')
 def books():
     """Main books listing page - MVC Controller"""
-    category = request.args.get('category', '')  # Get category from URL parameters
+    category = request.args.get('category', '')
     
     if category:
-        book_list = filter_books_by_category(category)  # Filter books by category
+        book_list = filter_books_by_category(category)
     else:
-        book_list = get_sorted_books()  # Get all sorted books
+        book_list = get_sorted_books()
     
-    # Add preview descriptions for display in View
+    # Add preview descriptions for View
     for book in book_list:
         book['preview_description'] = get_description_preview(book['description'])
     
-    categories = ['Children', 'Teens', 'Adult']  # Available categories for filter dropdown
+    categories = ['Children', 'Teens', 'Adult']
     
     return render_template('books.html',
                          books=book_list,
@@ -51,7 +50,7 @@ def books():
                          
 @app.route('/book/<string:book_title>')
 def book_details(book_title):
-    """Book details page - using book title as URL identifier"""
+    """Book details page - using book title as identifier"""
     # Find the book by title
     book = None
     book_index = -1
@@ -63,7 +62,7 @@ def book_details(book_title):
             break
     
     if book is None:
-        return "Book not found", 404  # Return 404 error if book does not exist
+        return "Book not found", 404
     
     return render_template('book_details.html', 
                          book=book, 
