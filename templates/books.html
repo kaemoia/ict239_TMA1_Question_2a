@@ -11,7 +11,7 @@
             <div class="d-flex align-items-center ms-auto">
                 <span class="fw-normal me-2">Category:</span>
                 <form action="{{ url_for('books') }}" method="get" class="d-flex">
-                    <select class="form-select" name="category" onchange="this.form.submit()">
+                    <select class="form-select" name="category">
                         <option value="">All</option>
                         {% for category in categories %}
                             <option value="{{ category }}" {% if category == selected_category %}selected{% endif %}>{{ category }}</option>
