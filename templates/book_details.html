@@ -1,52 +1,47 @@
-{% extends "base.html" %} <!-- Inherit from base template -->
+{% extends "base.html" %}
 
-{% block title %}{{ book.title }} - E-Library{% endblock %} <!-- Dynamic page title with book title -->
-{% block page_title %}BOOK DETAILS{% endblock %} <!-- Page header -->
+{% block title %}{{ book.title }} - E-Library{% endblock %}
+{% block page_title %}BOOK DETAILS{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-12">
-        <!-- Main book details card -->
         <div class="card shadow-sm border-0 mb-4 book-details-container">
             <div class="card-body p-4">
                 <div class="row">
-                    <!-- Book cover image column -->
                     <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12 mb-4">
                         <div class="d-flex justify-content-center align-items-start">
                             <img src="{{ book.url }}" 
                                  class="img-fluid book-cover-image" 
                                  alt="{{ book.title }} cover"
-                                 onerror="this.src='https://via.placeholder.com/300x400?text=No+Image+Available'"> <!-- Fallback image if cover fails to load -->
+                                 onerror="this.src='https://via.placeholder.com/300x400?text=No+Image+Available'">
                         </div>
                     </div>
                     
-                    <!-- Book information column -->
                     <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
-                        <h1 class="book-title mb-2 fw-normal">{{ book.title }}</h1> <!-- Book title -->
+                        <h1 class="book-title mb-2 fw-normal">{{ book.title }}</h1>
                         
                         <p class="author-byline book-title mb-2">
-                            By {{ book.authors | join(', ') }} <!-- Display authors as comma-separated list -->
-                        </p>
-                        
-                        <!-- Book metadata -->
-                        <p class="book-info mb-2">
-                            <span class="info-label">Category:</span> {{ book.category }}{% if book.genres %}, {{ book.genres | join(', ') }}{% endif %} <!-- Display category and genres -->
+                            By {{ book.authors | join(', ') }}
                         </p>
                         
                         <p class="book-info mb-2">
-                            <span class="info-label">Pages:</span> {{ book.pages }} <!-- Page count -->
+                            <span class="info-label">Category:</span> {{ book.category }}{% if book.genres %}, {{ book.genres | join(', ') }}{% endif %}
+                        </p>
+                        
+                        <p class="book-info mb-2">
+                            <span class="info-label">Pages:</span> {{ book.pages }}
                         </p>
                         
                         <p class="book-info mb-4">
                             <span class="info-label">Copies:</span> <strong>{{ book.copies }}</strong> 
-                            <span class="info-label">Available:</span> <strong>{{ book.available }}</strong> <!-- Inventory information -->
+                            <span class="info-label">Available:</span> <strong>{{ book.available }}</strong>
                         </p>
                         
-                        <!-- Full book description -->
                         <div class="book-description">
                             {% if book.description %}
                                 {% for paragraph in book.description %}
-                                    <p class="mb-3">{{ paragraph }}</p> <!-- Display each paragraph of description -->
+                                    <p class="mb-3">{{ paragraph }}</p>
                                 {% endfor %}
                             {% endif %}
                         </div>
@@ -55,7 +50,6 @@
             </div>
         </div>
         
-        <!-- Back to books list button -->
         <div class="d-flex justify-content-end">
             <a href="{{ url_for('books') }}" class="btn btn-outline-primary">
                 Back to Book Titles
